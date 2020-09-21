@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "create": "npx hygen simple-site-access with-prompt",
-    "start": "ts-node"
+    "create-file": "npx hygen simple-site-access with-prompt",
+    "ts-node": "npx ts-node",
+    "up": "docker-compose up --build -d",
+    "exec": "docker-compose exec selenium /bin/bash",
+    "down": "docker-compose down"
   },
   "keywords": [],
   "author": "",
