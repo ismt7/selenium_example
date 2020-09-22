@@ -1,23 +1,27 @@
 {
-  "name": "test_selenium",
+  "name": "selenium_example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "create-file": "npx hygen simple-site-access with-prompt",
-    "ts-node": "npx ts-node",
-    "up": "docker-compose up --build -d",
+    "build": "docker-compose build --no-cache",
+    "up": "docker-compose up -d",
     "exec": "docker-compose exec selenium /bin/bash",
     "down": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismt7/selenium_example.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismt7/selenium_example/issues"
+  },
+  "homepage": "https://github.com/ismt7/selenium_example#readme",
   "dependencies": {
-    "@types/selenium-webdriver": "^4.0.9",
-    "chromedriver": "^84.0.1",
-    "hygen": "^6.0.4",
-    "selenium-webdriver": "^4.0.0-alpha.7",
-    "ts-node": "^9.0.0"
+    "hygen": "^6.0.4"
   }
 }

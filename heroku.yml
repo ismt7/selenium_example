@@ -1,0 +1,4 @@
+build:
+  docker:
+    selenium: Dockerfile
+    worker: worker/Dockerfile
