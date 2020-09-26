@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 # export DEBIAN_FRONTEND=noninteractive
 
-COPY src/ /home/
+COPY app/ /home/
 
 RUN apt-get update && \
     apt-get install -y \

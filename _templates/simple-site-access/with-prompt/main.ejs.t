@@ -1,5 +1,5 @@
 ---
-to: src/<%= file_name %>.ts
+to: app/<%= file_name %>.ts
 ---
 import { Builder, ThenableWebDriver } from 'selenium-webdriver'
 import { Options } from 'selenium-webdriver/chrome'
