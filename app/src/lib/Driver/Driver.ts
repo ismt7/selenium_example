@@ -2,7 +2,7 @@ import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver'
 import { Options } from 'selenium-webdriver/chrome'
 import 'chromedriver'
 
-export class Driver {5000
+export class Driver {
   driver: ThenableWebDriver
   options: Options
 
