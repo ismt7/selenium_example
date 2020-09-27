@@ -1,43 +1,44 @@
-import { Builder, ThenableWebDriver, WebDriver } from 'selenium-webdriver'
+import { Builder, ThenableWebDriver } from 'selenium-webdriver'
 import { Options } from 'selenium-webdriver/chrome'
 import 'chromedriver'
 
 export class Driver {
   driver: ThenableWebDriver
+
   options: Options
 
   constructor() {
     this.options = new Options()
       .addArguments('--no-sandbox')
       .addArguments('--disable-gpu')
-    this.driver = this._build()
+    this.driver = this.build()
   }
 
-  private _build() {
+  private build(): ThenableWebDriver {
     return new Builder()
       .forBrowser('chrome')
       .setChromeOptions(this.options)
       .build()
   }
 
-  async get(url: string) {
+  async get(url: string): Promise<void> {
     await this.driver.get(url)
-    .catch(() => {
-      return null
-    })
+      .catch((e) => {
+        throw new Error(e)
+      })
   }
 
-  async sleep(sleepTime: number = 5000) {
+  async sleep(sleepTime: number = 5000): Promise<void> {
     await this.driver.sleep(sleepTime)
   }
 
-  private async _quit() {
+  private async quit(): Promise<void> {
     if (!this.driver) return
 
     await this.driver.quit()
   }
 
-  enabledHeadless() {
+  enabledHeadless(): void {
     this.options.headless()
   }
 }
