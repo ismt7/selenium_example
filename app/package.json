@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ts-node": "npx ts-node"
+    "ts-node": "npx ts-node",
+    "eslint": "npx eslint --ext .ts ./"
   },
   "keywords": [],
   "author": "",
