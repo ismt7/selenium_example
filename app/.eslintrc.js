@@ -18,5 +18,13 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/semi": ["error", "never"],
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/no-inferrable-types": [
+            "error", {
+                "ignoreParameters": true,
+                "ignoreProperties": false
+            }
+        ]
     }
 };
