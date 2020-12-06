@@ -1,11 +1,7 @@
-import { Driver } from './lib/Driver/Driver'
+import { DriverWrapper } from './lib/Driver/DriverWrapper'
 
-(async () => {
-  try {
-    const driver: Driver = new Driver()
-    await driver.get('https://app.getpocket.com/')
-    await driver.sleep()
-  } catch (e) {
-    throw new Error(e)
-  }
+;(async () => {
+  const driver: DriverWrapper = new DriverWrapper().build()
+  await driver.get('https://app.getpocket.com/')
+  await driver.sleep()
 })()
