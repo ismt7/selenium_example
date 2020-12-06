@@ -1,21 +1,21 @@
 import 'chromedriver'
-import { Builder, ThenableWebDriver } from 'selenium-webdriver'
+import { Builder, Locator, WebDriver, WebElement } from 'selenium-webdriver'
 import { Options } from 'selenium-webdriver/chrome'
 import { execSync } from "child_process"
 
 export class DriverWrapper {
-  private driver!: ThenableWebDriver
+  private readonly DefaultWaitTime = 10000
+  private driver!: WebDriver
   private options: Options
   private exceptionDriverQuit: boolean = false
 
   constructor() {
     this.options = new Options()
-      .addArguments('--no-sandbox')
-      .addArguments('--disable-gpu')
+      .addArguments('--no-sandbox', '--disable-gpu')
   }
 
-  build(): DriverWrapper {
-    this.driver = new Builder()
+  async build(): Promise<DriverWrapper> {
+    this.driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(this.options)
       .build()
@@ -33,8 +33,31 @@ export class DriverWrapper {
       })
   }
 
+  async click(locator: Locator, waitTime?: number): Promise<void> {
+    await (await this.wait(locator, waitTime)).click()
+  }
+
+  async sendKeys(locator: Locator, value: string, waitTime?: number): Promise<void> {
+    await (await this.wait(locator, waitTime)).sendKeys(value)
+  }
+
+  async getInputValue(locator: Locator, waitTime?: number): Promise<string> {
+    return await (await this.wait(locator, waitTime)).getAttribute("value")
+  }
+
+  async wait(locator: Locator, waitTime?: number): Promise<WebElement> {
+    return await this.driver.wait(
+      this.driver.findElement(locator),
+      waitTime ?? this.DefaultWaitTime
+    ).catch((e) => {
+      throw new Error(e)
+    })
+  }
+
   async sleep(sleepTime: number = 5000): Promise<void> {
-    await this.driver.sleep(sleepTime)
+    await this.driver.sleep(sleepTime).catch((e) => {
+      throw new Error(e)
+    })
   }
 
   async quit(): Promise<void> {
